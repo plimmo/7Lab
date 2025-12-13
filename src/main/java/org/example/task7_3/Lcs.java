@@ -13,10 +13,8 @@ public class Lcs {
             String X = br.readLine().trim();
             String Y = br.readLine().trim();
             br.close();
-
             int n = X.length();
             int m = Y.length();
-
             int[][] dp = new int[n + 1][m + 1];
 
             for (int i = 1; i <= n; i++) {
@@ -31,7 +29,7 @@ public class Lcs {
 
             int result = dp[n][m];
             System.out.println(result);
-
+            
         } catch (Exception e) {
             System.out.println("Ошибка при работе с файлами: " + e.getMessage());
         }

@@ -1,6 +1,7 @@
 package org.example.task7_3;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 public class Lcs {
 

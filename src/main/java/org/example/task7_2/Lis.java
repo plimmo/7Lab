@@ -18,14 +18,13 @@ public class Lis {
             BufferedReader br = new BufferedReader(new FileReader(inputFile));
             int n = Integer.parseInt(br.readLine().trim());
             int[] a = new int[n];
+
             StringTokenizer st = new StringTokenizer(br.readLine());
-            
             for (int i = 0; i < n; i++) {
                 a[i] = Integer.parseInt(st.nextToken());
             }
-            
             br.close();
-
+            
             int[] d = new int[n + 1];
             int[] pos = new int[n + 1];
             int[] prev = new int[n];
@@ -36,11 +35,11 @@ public class Lis {
 
             for (int i = 0; i < n; i++) {
                 int j = lowerBound(d, a[i]);
-                if (d[j - 1] < a[i] && a[i] < d[j]) {
-                    d[j] = a[i];
-                    pos[j] = i;
-                    prev[i] = pos[j - 1];
-                    length = Math.max(length, j);
+                d[j] = a[i];
+                pos[j] = i;
+                prev[i] = pos[j - 1];
+                if (j > length) {
+                    length = j;
                 }
             }
 
@@ -54,25 +53,26 @@ public class Lis {
             BufferedWriter bw = new BufferedWriter(new FileWriter(outputFile));
             bw.write(length + "\n");
             for (int i = 0; i < length; i++) {
-                bw.write(answer[i] + " ");
+                bw.write(answer[i] + (i < length - 1 ? " " : ""));
             }
             bw.close();
             System.out.println("Ответ в " + outputFile);
+
         } catch (Exception e) {
             System.out.println("Ошибка при работе с файлами: " + e.getMessage());
         }
     }
 
     static int lowerBound(int[] d, int x) {
-        int l = 0, r = d.length - 1;
+        int l = 0, r = d.length;
         while (l < r) {
             int m = (l + r) / 2;
             if (d[m] >= x) {
                 r = m;
+            } else {
+                l = m + 1;
             }
-            else l = m + 1;
         }
-        
         return l;
     }
 }

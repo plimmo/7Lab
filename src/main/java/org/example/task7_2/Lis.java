@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Lis {
-
     static final int INF = (int)1e9;
 
     public static void main(String[] args) {
@@ -19,21 +18,20 @@ public class Lis {
             BufferedReader br = new BufferedReader(new FileReader(inputFile));
             int n = Integer.parseInt(br.readLine().trim());
             int[] a = new int[n];
-
             StringTokenizer st = new StringTokenizer(br.readLine());
+            
             for (int i = 0; i < n; i++) {
                 a[i] = Integer.parseInt(st.nextToken());
             }
+            
             br.close();
 
             int[] d = new int[n + 1];
             int[] pos = new int[n + 1];
             int[] prev = new int[n];
-
             Arrays.fill(d, INF);
             d[0] = -INF;
             pos[0] = -1;
-
             int length = 0;
 
             for (int i = 0; i < n; i++) {
@@ -59,9 +57,7 @@ public class Lis {
                 bw.write(answer[i] + " ");
             }
             bw.close();
-
             System.out.println("Ответ в " + outputFile);
-
         } catch (Exception e) {
             System.out.println("Ошибка при работе с файлами: " + e.getMessage());
         }
@@ -76,6 +72,7 @@ public class Lis {
             }
             else l = m + 1;
         }
+        
         return l;
     }
 }

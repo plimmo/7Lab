@@ -8,30 +8,31 @@ public class Lcs {
     public static void main(String[] args) {
         String inputFile = "lcs-input.txt";
 
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(inputFile));
-            String X = br.readLine().trim();
-            String Y = br.readLine().trim();
-            br.close();
-            int n = X.length();
-            int m = Y.length();
-            int[][] dp = new int[n + 1][m + 1];
+        String X, Y;
 
-            for (int i = 1; i <= n; i++) {
-                for (int j = 1; j <= m; j++) {
-                    if (X.charAt(i - 1) == Y.charAt(j - 1)) {
-                        dp[i][j] = dp[i - 1][j - 1] + 1;
-                    } else {
-                        dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
-                    }
+        try (BufferedReader br = new BufferedReader(new FileReader(inputFile))) {
+            X = br.readLine().trim();
+            Y = br.readLine().trim();
+        } catch (Exception e) {
+            System.out.println("Ошибка при чтении файла: " + e.getMessage());
+            return;
+        }
+
+        int n = X.length();
+        int m = Y.length();
+        int[][] dp = new int[n + 1][m + 1];
+
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                if (X.charAt(i - 1) == Y.charAt(j - 1)) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                } else {
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
                 }
             }
-
-            int result = dp[n][m];
-            System.out.println(result);
-            
-        } catch (Exception e) {
-            System.out.println("Ошибка при работе с файлами: " + e.getMessage());
         }
+
+        int result = dp[n][m];
+        System.out.println(result);
     }
 }
